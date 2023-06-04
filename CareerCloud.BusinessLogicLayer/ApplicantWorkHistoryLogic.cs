@@ -10,13 +10,16 @@ namespace CareerCloud.BusinessLogicLayer
 {
     public class ApplicantWorkHistoryLogic : BaseLogic<ApplicantWorkHistoryPoco>
     {
+        private readonly List<ValidationException> exceptions;
         public ApplicantWorkHistoryLogic(IDataRepository<ApplicantWorkHistoryPoco> repository) : base(repository)
-        { }
+        { 
+            exceptions = new List<ValidationException>(); 
+        }
 
 
         protected override void Verify(ApplicantWorkHistoryPoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+            
             foreach (var poco in pocos)
             {
                 if (poco.CompanyName.Length <= 2)

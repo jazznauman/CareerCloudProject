@@ -1,17 +1,36 @@
 using CareerCloud.gRPC.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace CareerCloud.gRPC
+{
+    public class Program
+    {
 
-// Additional configuration is required to successfully run gRPC on macOS.
-// For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddGrpc();
+            // Additional configuration is required to successfully run gRPC on macOS.
+            // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
 
-var app = builder.Build();
+            // Add services to the container.
+            builder.Services.AddGrpc();
 
-// Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
-app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+            var app = builder.Build();
 
-app.Run();
+            // Configure the HTTP request pipeline.
+            app.MapGrpcService<ApplicantEducationService>();
+            app.MapGrpcService<ApplicantJobApplicationService>();
+            app.MapGrpcService<ApplicantProfileService>();
+            app.MapGrpcService<CompanyDescriptionService>();
+            app.MapGrpcService<CompanyJobEducationService>();
+            app.MapGrpcService<CompanyJobService>();
+            app.MapGrpcService<SecurityLoginService>();
+            app.MapGrpcService<SecurityLoginsLogService>();
+            app.MapGrpcService<SystemLanguageCodeService>();
+
+            app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+
+            app.Run();
+        }
+    }
+}

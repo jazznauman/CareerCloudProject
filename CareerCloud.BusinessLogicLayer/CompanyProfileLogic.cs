@@ -11,12 +11,16 @@ namespace CareerCloud.BusinessLogicLayer
 {
     public class CompanyProfileLogic : BaseLogic<CompanyProfilePoco>
     {
+        private readonly List<ValidationException> exceptions;
         public CompanyProfileLogic(IDataRepository<CompanyProfilePoco> repository) : base(repository)
-        { }
+        {
+            exceptions = new List<ValidationException>();
+        
+        }
 
         protected override void Verify(CompanyProfilePoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+            
             foreach (var poco in pocos)
             {
                 string[] phoneParts = poco.ContactPhone?.Split('-');

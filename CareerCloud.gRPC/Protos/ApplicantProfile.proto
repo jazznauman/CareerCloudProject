@@ -1,3 +1,78 @@
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto"; //for void
 
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+
+
+package ApplicantProfile;
+
+service ApplicantProfile
+{
+
+	//Get a record based on the ID
+	rpc GetSingle(ApplicantProfileRequest) returns (ApplicantProfileResponse);
+
+	
+	//Get all the records from the database but returns an array
+	rpc GetAll(google.protobuf.Empty) returns (MultipleApplicantProfileResponses);
+
+	//Update 
+	 rpc UpdateApplicantProfile (ApplicantProfileResponse) returns (google.protobuf.Empty);
+
+	 //Delete 
+    rpc DeleteApplicantProfile (ApplicantProfileResponse) returns (google.protobuf.Empty);
+
+}
+
+message ApplicantProfileRequest
+{   
+	string Id = 1;
+
+}
+
+message ApplicantProfileResponse //database structure
+{
+	string Id=1;
+    string Login=2;
+	double CurrentSalary = 3;
+	double CurrentRate = 4;
+	string Currency = 5;
+	string Country = 6;
+	string Province = 7;
+	string Street=8;
+	string City=9;
+	string PostalCode=10;
+	google.protobuf.Timestamp TimeStamp=11;
+
+
+
+}	
+	
+
+
+	
+	
+
+message MultipleApplicantProfileResponses
+{
+	
+	repeated ApplicantProfileResponse MultipleProfileResponse=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,11 +10,15 @@ namespace CareerCloud.BusinessLogicLayer
 {
     public class CompanyLocationLogic: BaseLogic<CompanyLocationPoco>
     {
+        private readonly List<ValidationException> exceptions;
         public CompanyLocationLogic(IDataRepository<CompanyLocationPoco> repository) : base(repository)
-        { }
+        {
+            exceptions = new List<ValidationException>();
+        
+        }
         protected override void Verify(CompanyLocationPoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+            
             foreach (var poco in pocos)
             {
                 if (string.IsNullOrEmpty(poco.CountryCode))

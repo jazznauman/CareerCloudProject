@@ -12,14 +12,16 @@ namespace CareerCloud.BusinessLogicLayer
 
     { 
         private IDataRepository<SystemCountryCodePoco> _repository;
+        private readonly List<ValidationException> exceptions;
         public SystemCountryCodeLogic(IDataRepository<SystemCountryCodePoco> repository)
         {
                _repository = repository;
+            exceptions = new List<ValidationException>();
         }
 
         public  void Verify(SystemCountryCodePoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+            
             foreach (var poco in pocos)
             {
                 if (string.IsNullOrEmpty(poco.Code))

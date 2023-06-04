@@ -10,11 +10,14 @@ namespace CareerCloud.BusinessLogicLayer
 {
     public class ApplicantProfileLogic: BaseLogic <ApplicantProfilePoco>
     {
+        private readonly List<ValidationException> exceptions;
         public ApplicantProfileLogic(IDataRepository<ApplicantProfilePoco> repository) : base(repository)
-        { }
+        {
+             exceptions = new List<ValidationException>();
+        }
         protected override void Verify(ApplicantProfilePoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+            
             foreach (var poco in pocos)
             {
                 if(poco.CurrentSalary < 0)

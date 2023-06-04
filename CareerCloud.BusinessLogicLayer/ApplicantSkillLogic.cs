@@ -10,12 +10,15 @@ namespace CareerCloud.BusinessLogicLayer
 {
     public class ApplicantSkillLogic : BaseLogic<ApplicantSkillPoco>
     {
+        private readonly List<ValidationException> exceptions;
         public ApplicantSkillLogic(IDataRepository<ApplicantSkillPoco> repository) : base(repository)
-        { }
+        {
+            exceptions = new List<ValidationException>();
+        }
 
         protected override void Verify(ApplicantSkillPoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+             
             foreach (var poco in pocos)
             {
               if(poco.StartMonth > 12)

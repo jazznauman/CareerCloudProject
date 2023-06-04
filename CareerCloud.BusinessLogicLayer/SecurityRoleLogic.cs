@@ -10,12 +10,14 @@ namespace CareerCloud.BusinessLogicLayer
 {
     public class SecurityRoleLogic: BaseLogic<SecurityRolePoco>
     {
+        private readonly List<ValidationException> exceptions;
         public SecurityRoleLogic(IDataRepository<SecurityRolePoco> repository) : base(repository)
-        { }
+        { exceptions = new List<ValidationException>();
+        }
 
         protected override void Verify(SecurityRolePoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+            
             foreach (var poco in pocos)
             {
                 if (string.IsNullOrEmpty(poco.Role))

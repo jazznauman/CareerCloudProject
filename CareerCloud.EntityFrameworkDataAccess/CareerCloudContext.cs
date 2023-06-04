@@ -5,16 +5,32 @@ using Microsoft.Extensions.Configuration;
 namespace CareerCloud.EntityFrameworkDataAccess
 {
     public class CareerCloudContext : DbContext
+
+
+
     {
+
+        //protected string _connStr = string.Empty;
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    var config = new ConfigurationBuilder();
+        //    var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+        //    config.AddJsonFile(path, false);
+        //    var root = config.Build();
+        //    _connStr = root.GetSection("ConnectionStrings").GetSection("DataConnection").Value;
+        //    optionsBuilder.UseSqlServer(_connStr);
+
+        //    base.OnConfiguring(optionsBuilder);
+        //}
         private readonly string _connectionString;
 
         public CareerCloudContext(string connectionString)
         {
-            _connectionString = connectionString;
+           _connectionString = connectionString;
         }
 
         public CareerCloudContext()
-        { 
+        {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,7 +38,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
             optionsBuilder.UseSqlServer(_connectionString);
             base.OnConfiguring(optionsBuilder);
         }
-       
+
         public DbSet<ApplicantEducationPoco> ApplicantEducations { get; set; }
         public DbSet<ApplicantJobApplicationPoco> ApplicantJobApplications { get; set; }
         public DbSet<ApplicantProfilePoco> ApplicantProfiles { get; set; }

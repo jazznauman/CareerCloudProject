@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 namespace CareerCloud.BusinessLogicLayer
 {
     public class ApplicantEducationLogic : BaseLogic<ApplicantEducationPoco>
-    {    
+    {
+        private readonly List<ValidationException> exceptions;
         public ApplicantEducationLogic(IDataRepository<ApplicantEducationPoco> repository) : base(repository)
         {
+            exceptions = new List<ValidationException>();
         }
 
         public override void Add(ApplicantEducationPoco[] pocos)
@@ -29,10 +31,10 @@ namespace CareerCloud.BusinessLogicLayer
 
         protected override void Verify(ApplicantEducationPoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+           
             
 
-            foreach (var poco in pocos)
+            foreach (ApplicantEducationPoco poco in pocos)
             {
                 if (string.IsNullOrEmpty(poco.Major))
                 {

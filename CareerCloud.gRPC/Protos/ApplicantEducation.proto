@@ -1,35 +1,52 @@
+
 syntax = "proto3";
 
-option csharp_namespace = "CareerCloud.gRPC.Protos";
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "CareerCloud.gRPC.Protos";
+
 
 package ApplicantEducation;
 
-service ApplicantEducation{
+service ApplicantEducation
+{
 
 	//Get a record based on the ID
 	rpc GetSingle(ApplicantEducationRequest) returns (ApplicantEducationResponse);
 
+	//Get all the records from the database but returns an array
+	rpc GetAll(google.protobuf.Empty) returns (MultipleEducationResponses);
+
+	//Update 
+	 rpc UpdateApplicantEducation (ApplicantEducationResponse) returns (google.protobuf.Empty);
+
+	 //Delete 
+    rpc DeleteApplicantEducation (ApplicantEducationResponse) returns (google.protobuf.Empty);
 }
+
 message ApplicantEducationRequest
 {   
-	string id=1;
-    string Applicant =2;
-	string Major=3;
-	string Certificate_Diploma=4;
-	google.protobuf.Timestamp StartDate=5;
-	google.protobuf.Timestamp CompletionDate=6;
-	int32 CompletionPercent=7;
-	google.protobuf.Timestamp TimeStamp=8;
-
-
-
-
+	string id = 1;
 
 }
 
 message ApplicantEducationResponse
 {
-
+	string Id=1;
+    string Applicant=2;
+	string Major=3;
+	string CertificateDiploma=4;
+	google.protobuf.Timestamp StartDate=5;
+	google.protobuf.Timestamp CompletionDate=6;
+	int32 CompletionPercent=7;
+	bytes Timestamp=8;
 }
+
+message MultipleEducationResponses
+{
+	
+	repeated ApplicantEducationResponse MultipleEduResponse=1;
+}
+
 

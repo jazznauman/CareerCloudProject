@@ -1,3 +1,76 @@
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto"; //for void
 
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+
+
+package CompanyDescription;
+
+service CompanyDescription
+{
+
+	//Get a record based on the ID
+	rpc GetSingle(CompanyDescriptionRequest) returns (CompanyDescriptionResponse);
+
+	
+	//Get all the records from the database but returns an array
+	rpc GetAll(google.protobuf.Empty) returns (MultipleCompanyDescriptionResponses);
+
+	//Update 
+	 rpc UpdateCompanyDescription (CompanyDescriptionResponse) returns (google.protobuf.Empty);
+
+	 //Delete 
+    rpc DeleteCompanyDescription (CompanyDescriptionResponse) returns (google.protobuf.Empty);
+
+}
+
+message CompanyDescriptionRequest
+{   
+	string Id = 1;
+
+}
+
+message CompanyDescriptionResponse //database structure
+{
+	string Id=1;
+    string Company=2;
+
+	
+	string LanguageId=3;
+	string CompanyName = 4;
+	string CompanyDescription=5;
+	
+	google.protobuf.Timestamp TimeStamp=6;
+
+
+
+}	
+	
+
+
+	
+	
+
+message MultipleCompanyDescriptionResponses
+{
+	
+	repeated CompanyDescriptionResponse MultipleDescResponse=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

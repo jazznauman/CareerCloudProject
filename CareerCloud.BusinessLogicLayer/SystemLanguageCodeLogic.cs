@@ -12,15 +12,17 @@ namespace CareerCloud.BusinessLogicLayer
     public class SystemLanguageCodeLogic
     {
         private IDataRepository<SystemLanguageCodePoco> _repository;
+        private readonly List<ValidationException> exceptions;
 
         public SystemLanguageCodeLogic(IDataRepository<SystemLanguageCodePoco> repository) 
         {
             _repository = repository;
+            exceptions = new List<ValidationException>();
         }
 
         public void Verify(SystemLanguageCodePoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+           
             foreach (var poco in pocos)
             {
                 if (string.IsNullOrEmpty(poco.LanguageID))

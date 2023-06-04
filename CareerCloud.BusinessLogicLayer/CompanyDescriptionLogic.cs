@@ -10,12 +10,15 @@ namespace CareerCloud.BusinessLogicLayer
 {
     public class CompanyDescriptionLogic : BaseLogic<CompanyDescriptionPoco>
     {
+        private readonly List<ValidationException> exceptions;
         public CompanyDescriptionLogic(IDataRepository<CompanyDescriptionPoco> repository) : base(repository)
-        { }
+        { 
+            exceptions = new List<ValidationException>();
+        }
 
         protected override void Verify(CompanyDescriptionPoco[] pocos)
         {
-            List<ValidationException> exceptions = new List<ValidationException>();
+            
             foreach (var poco in pocos)
             {
                 if (poco.CompanyDescription?.Length <= 2)

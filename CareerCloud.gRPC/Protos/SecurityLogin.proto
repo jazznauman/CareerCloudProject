@@ -1,3 +1,84 @@
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto"; //for void
 
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+
+
+package SecurityLogin;
+
+service SecurityLogin
+{
+
+	//Get a record based on the ID
+	rpc GetSingle(SecurityLoginRequest) returns (SecurityLoginResponse);
+
+	
+	//Get all the records from the database but returns an array
+	rpc GetAll(google.protobuf.Empty) returns (MultipleSecurityLoginResponses);
+
+	//Update 
+	 rpc UpdateSecurityLogin (SecurityLoginResponse) returns (google.protobuf.Empty);
+
+	 //Delete 
+    rpc DeleteSecurityLogin (SecurityLoginResponse) returns (google.protobuf.Empty);
+
+}
+
+message SecurityLoginRequest
+{   
+	string Id = 1;
+
+}
+
+message SecurityLoginResponse //database structure
+{
+	string Id=1;
+    string Login=2;
+	string Password=3;
+    google.protobuf.Timestamp Created = 4;
+	google.protobuf.Timestamp PasswordUpdate=5;
+	google.protobuf.Timestamp AgreementAccepted=6;
+	bool IsLocked=7;
+	bool IsInactive=8;
+	string EmailAddress=9;
+	string PhoneNumber=10;
+	string FullName=11;
+	bool ForceChangePassword=12;
+    string PrefferredLanguage=13;
+	google.protobuf.Timestamp TimeStamp=14;
+       
+    
+       
+   
+
+
+}	
+	
+
+
+	
+	
+
+message MultipleSecurityLoginResponses
+{
+	
+	repeated SecurityLoginResponse MultipleSecurityLoginResp=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
